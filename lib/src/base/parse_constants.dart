@@ -43,6 +43,7 @@ const String keyRelation = 'Relation';
 // Headers
 const String keyHeaderSessionToken = 'X-Parse-Session-Token';
 const String keyHeaderRevocableSession = 'X-Parse-Revocable-Session';
+const String keyHeaderInstallationId = 'X-Parse-Installation-Id';
 const String keyHeaderUserAgent = 'user-agent';
 const String keyHeaderApplicationId = 'X-Parse-Application-Id';
 const String keyHeaderContentType = 'Content-Type';

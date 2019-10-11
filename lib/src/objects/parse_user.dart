@@ -206,18 +206,22 @@ class ParseUser extends ParseObject implements ParseCloneable {
 
   // Logs in a user using a service
   static Future<ParseResponse> loginWith(
-      String provider, Object authData) async {
+      String provider, Object authData, String installationId) async {
     final ParseUser user = ParseUser.createUser();
-    final ParseResponse response = await user._loginWith(provider, authData);
+    final ParseResponse response = await user._loginWith(provider, authData, installationId);
     return response;
   }
 
-  Future<ParseResponse> _loginWith(String provider, Object authData) async {
+  Future<ParseResponse> _loginWith(String provider, Object authData, String installationId) async {
     try {
+
+      installationId ??= Uuid().v4();
+
       final Uri url = getSanitisedUri(_client, '$keyEndPointUsers');
       final Response response = await _client.post(url,
           headers: <String, String>{
             keyHeaderRevocableSession: '1',
+            keyHeaderInstallationId: installationId
           },
           body: jsonEncode(<String, dynamic>{
             'authData': <String, dynamic>{provider: authData}
