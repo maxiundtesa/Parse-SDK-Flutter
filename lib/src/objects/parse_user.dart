@@ -208,12 +208,11 @@ class ParseUser extends ParseObject implements ParseCloneable {
   static Future<ParseResponse> loginWith(
       String provider, Object authData, String installationId, String realName) async {
     final ParseUser user = ParseUser.createUser();
-    user.set("realName", realName);
-    final ParseResponse response = await user._loginWith(provider, authData, installationId);
+    final ParseResponse response = await user._loginWith(provider, authData, installationId, realName);
     return response;
   }
 
-  Future<ParseResponse> _loginWith(String provider, Object authData, String installationId) async {
+  Future<ParseResponse> _loginWith(String provider, Object authData, String installationId, String realName) async {
     try {
 
       installationId ??= Uuid().v4();
@@ -225,7 +224,8 @@ class ParseUser extends ParseObject implements ParseCloneable {
             keyHeaderInstallationId: installationId
           },
           body: jsonEncode(<String, dynamic>{
-            'authData': <String, dynamic>{provider: authData}
+            'authData': <String, dynamic>{provider: authData},
+            'realName':realName
           }));
 
       return await _handleResponse(
