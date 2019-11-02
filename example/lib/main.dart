@@ -44,11 +44,18 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initData();
+
+    //initData();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final error = ParseError(code: 400, message: "Das ist doof");
+    final string = error.toString();
+    final newParseError = ParseError.createFromString(string);
+
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
