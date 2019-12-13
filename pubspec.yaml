@@ -18,7 +18,7 @@ dependencies:
   #Database
   sembast: ^2.0.1
   xxtea: ^2.0.2
-  shared_preferences: ^0.5.3+2
+  shared_preferences: ^0.5.6
 
   # Utils
   path_provider: ^1.1.2

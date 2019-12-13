@@ -13,7 +13,7 @@ import 'package:flutter_plugin_example/domain/utils/db_utils.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 void main() {
-  _setTargetPlatformForDesktop();
+  //_setTargetPlatformForDesktop();
 
   runApp(MyApp());
 }
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    //initData();
+    initData();
   }
 
   @override
@@ -70,14 +70,13 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> initData() async {
     // Initialize repository
-    await initRepository();
-    final CoreStore coreStore = await initCoreStore();
+  //  await initRepository();
+  //  final CoreStore coreStore = await initCoreStore();
 
     // Initialize parse
     await Parse().initialize(keyParseApplicationId, keyParseServerUrl,
-        masterKey: keyParseMasterKey,
         debug: true,
-        coreStore: await CoreStoreSharedPrefsImp.getInstance());
+    );
 
     //parse serve with secure store and desktop support
 
@@ -112,7 +111,7 @@ class _MyAppState extends State<MyApp> {
     await getSingleItem();
     await getConfigs();
     await query();*/
-    await initUser();
+   // await initUser();
     /* await initInstallation();
     await function();
     await functionWithParameters();
