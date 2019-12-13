@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> initData() async {
     // Initialize repository
-    await initRepository();
+//    await initRepository();
     final CoreStore coreStore = await initCoreStore();
 
     // Initialize parse
