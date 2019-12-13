@@ -13,7 +13,7 @@ import 'package:flutter_plugin_example/domain/utils/db_utils.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 void main() {
-  _setTargetPlatformForDesktop();
+  //_setTargetPlatformForDesktop();
 
   runApp(MyApp());
 }
@@ -230,7 +230,6 @@ class _MyAppState extends State<MyApp> {
     }*/
 
     ParseUser user1 = await ParseUser.currentUser();
-    user1.authData;
 
     /// Login
     ParseResponse response = await user.login();
