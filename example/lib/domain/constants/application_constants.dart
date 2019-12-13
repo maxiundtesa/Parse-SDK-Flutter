@@ -1,5 +1,5 @@
-const String keyApplicationName = 'Test';
-const String keyParseApplicationId = 'naByWVkjpyrUN1mc5gGL7bGUsyt4dRtuoqXXcoeq';
+const String keyApplicationName = '';
+const String keyParseApplicationId = '';
 const String keyParseMasterKey = '';
-const String keyParseServerUrl = 'https://ticketfuchs.herokuapp.com/parse';
+const String keyParseServerUrl = '';
 const bool keyDebug = true;
