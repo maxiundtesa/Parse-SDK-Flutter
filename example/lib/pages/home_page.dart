@@ -24,7 +24,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final List<dynamic> json = const JsonDecoder().convert(dietPlansToAdd);
     for (final Map<String, dynamic> element in json) {
-      final DietPlan dietPlan = DietPlan().fromJson(element);
+      final DietPlan dietPlan = DietPlan();
+      element.forEach(
+          (String k, dynamic v) => dietPlan.set<dynamic>(k, parseDecode(v)));
       randomDietPlans.add(dietPlan);
     }
   }
@@ -72,8 +74,8 @@ class _HomePageState extends State<HomePage> {
             if (snapshot.data.success) {
               if (snapshot.data.results == null ||
                   snapshot.data.results.isEmpty) {
-                return Center(
-                  child: const Text('No Data'),
+                return const Center(
+                  child: Text('No Data'),
                 );
               }
             }
@@ -95,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListTile(
                       title: Text(
                         name,
-                        style: TextStyle(fontSize: 20.0),
+                        style: const TextStyle(fontSize: 20.0),
                       ),
                       subtitle: Text(description),
                       trailing: IconButton(
@@ -116,8 +118,8 @@ class _HomePageState extends State<HomePage> {
                   );
                 });
           } else {
-            return Center(
-              child: const Text('No Data'),
+            return const Center(
+              child: Text('No Data'),
             );
           }
         });

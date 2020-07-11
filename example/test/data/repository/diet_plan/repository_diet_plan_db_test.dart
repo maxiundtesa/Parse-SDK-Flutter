@@ -13,8 +13,10 @@ void main() {
   DietPlanProviderContract repository;
   SharedPreferences.setMockInitialValues(Map<String, String>());
 
-  Store _getStore(Database database) {
-    return database.getStore('diet_plan_repository_test');
+  StoreRef<String, Map<String, dynamic>> _getStore(Database database) {
+    final StoreRef<String, Map<String, dynamic>> store =
+    stringMapStoreFactory.store('repository_diet');
+    return store;
   }
 
   Future<DietPlanProviderContract> getRepository() async {
@@ -33,9 +35,7 @@ void main() {
 
   tearDown(() async {
     final Database database = await getDB();
-    final Store store = _getStore(database);
-    store.clear();
-    database.clear();
+    _getStore(database).drop(database);
   });
 
   test('create DB instance', () async {
@@ -131,7 +131,7 @@ void main() {
 
     // When
     DateTime dateTime = DateTime.now();
-    dateTime = dateTime.subtract(Duration(hours: 1));
+    dateTime = dateTime.subtract(const Duration(hours: 1));
     final ApiResponse updateResponse = await repository.getNewerThan(dateTime);
     final List<DietPlan> actual = updateResponse.results;
 

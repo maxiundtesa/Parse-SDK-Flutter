@@ -3,7 +3,7 @@ part of flutter_parse_sdk;
 abstract class ParseBase {
   String parseClassName;
   Type type;
-  bool _dirty = false; // reserved property
+  final bool _dirty = false; // reserved property
   final Map<String, dynamic> _unsavedChanges = Map<String, dynamic>();
   final Map<String, dynamic> _savingChanges = Map<String, dynamic>();
 
@@ -181,12 +181,16 @@ abstract class ParseBase {
     await ParseCoreData().getStore().setString(key, objectJson);
   }
 
+  void clearUnsavedChanges() {
+    _unsavedChanges.clear();
+  }
+
   /// Sets type [T] from objectData
   ///
   /// To set an int, call setType<int> and an int will be saved
   /// [bool] forceUpdate is always true, if unsure as to whether an item is
   /// needed or not, set to false
-  void set<T>(String key, T value, {bool forceUpdate = false}) {
+  void set<T>(String key, T value, {bool forceUpdate = true}) {
     if (value != null) {
       if (_getObjectData().containsKey(key)) {
         if (_getObjectData()[key] == value && !forceUpdate) {
@@ -220,7 +224,7 @@ abstract class ParseBase {
   /// Returns null or [defaultValue] if provided. To get an int, call
   /// getType<int> and an int will be returned, null, or a defaultValue if
   /// provided
-  dynamic get<T>(String key, {T defaultValue}) {
+  T get<T>(String key, {T defaultValue}) {
     if (_getObjectData().containsKey(key)) {
       if (T != null && _getObjectData()[key] is T) {
         final T data = _getObjectData()[key];

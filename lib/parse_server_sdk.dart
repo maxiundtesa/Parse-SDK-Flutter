@@ -21,6 +21,7 @@ import 'package:xxtea/xxtea.dart';
 
 export 'src/network/parse_live_query.dart'
 if (dart.library.js) 'src/network/parse_live_query_web.dart';
+export 'src/utils/parse_live_list.dart';
 
 part 'package:parse_server_sdk/src/objects/response/parse_error_response.dart';
 
@@ -135,7 +136,7 @@ class Parse {
 
     _hasBeenInitialized = true;
 
-    return Parse();
+    return this;
   }
 
   bool hasParseBeenInitialized() => _hasBeenInitialized;
