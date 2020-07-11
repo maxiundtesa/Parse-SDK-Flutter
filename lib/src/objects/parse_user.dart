@@ -153,11 +153,9 @@ class ParseUser extends ParseObject implements ParseCloneable {
       final Uri url = getSanitisedUri(_client, '$path');
       final String body = json.encode(bodyData);
       _saveChanges();
-      final String installationId = await _getInstallationId();
       final Response response = await _client.post(url,
           headers: <String, String>{
             keyHeaderRevocableSession: '1',
-            if (installationId != null) keyHeaderInstallationId: installationId,
           },
           body: body);
 
@@ -199,12 +197,10 @@ class ParseUser extends ParseObject implements ParseCloneable {
     try {
       final Uri url = getSanitisedUri(_client, '$keyEndPointUsers');
       final Uuid uuid = Uuid();
-      final String installationId = await _getInstallationId();
 
       final Response response = await _client.post(url,
           headers: <String, String>{
             keyHeaderRevocableSession: '1',
-            if (installationId != null) keyHeaderInstallationId: installationId,
           },
           body: jsonEncode(<String, dynamic>{
             'authData': <String, dynamic>{
