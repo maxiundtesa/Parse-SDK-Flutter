@@ -4,6 +4,7 @@ part of flutter_parse_sdk;
 class ParseCoreData {
   factory ParseCoreData() => _instance;
 
+  ParseCoreData._empty();
   ParseCoreData._init(this.applicationId, this.serverUrl);
 
   static ParseCoreData _instance;
@@ -158,6 +159,57 @@ class ParseCoreData {
   CoreStore getStore() {
     return storage;
   }
+
+  /// Converts the supplied [Map] to an instance of the [ParseCoreData] class.
+  static ParseCoreData fromMap(dynamic message) {
+    if (message == null) {
+      throw ArgumentError('The parameter \'message\' should not be null.');
+    }
+
+    final Map<dynamic, dynamic> coreDataMap = message;
+    final ParseCoreData coreData = ParseCoreData._empty();
+    coreData.appName = coreDataMap['name'];
+    coreData.appVersion = coreDataMap['appVersion'];
+    coreData.appPackageName = coreDataMap['appPackageName'];
+    coreData.applicationId = coreDataMap['applicationId'];
+    coreData.locale = coreDataMap['locale'];
+    coreData.serverUrl = coreDataMap['serverUrl'];
+    coreData.liveQueryURL = coreDataMap['liveQueryURL'];
+    coreData.masterKey = coreDataMap['masterKey'];
+    coreData.clientKey = coreDataMap['clientKey'];
+    coreData.sessionId = coreDataMap['sessionId'];
+    coreData.autoSendSessionId = coreDataMap['autoSendSessionId'] ?? true;
+    coreData.securityContext = coreDataMap['securityContext'];
+    coreData.debug = coreDataMap['debug'] ?? false;
+    coreData.liveListRetryIntervals = coreDataMap['liveListRetryIntervals'];
+    coreData.fileDirectory = coreDataMap['fileDirectory'];
+    return coreData;
+  }
+
+  /// Converts the [ParseCoreData] instance into a [Map] instance that can be
+  /// serialized to JSON.
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = Map<String, dynamic>();
+    map['appName'] = appName;
+    map['appVersion'] = appVersion;
+    map['appPackageName'] = appPackageName;
+    map['applicationId'] = applicationId;
+    map['locale'] = locale;
+    map['serverUrl'] = serverUrl;
+    map['liveQueryURL'] = liveQueryURL;
+    map['masterKey'] = masterKey;
+    map['clientKey'] = clientKey;
+    map['sessionId'] = sessionId;
+    map['autoSendSessionId'] = autoSendSessionId;
+    map['securityContext'] = securityContext;
+    map['debug'] = debug;
+    map['liveListRetryIntervals'] = liveListRetryIntervals;
+    map['fileDirectory'] = fileDirectory;
+    return map;
+  }
+
+
+
 
   @override
   String toString() => '$applicationId $masterKey';

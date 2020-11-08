@@ -48,7 +48,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
     }
   }
 
-  ParseHTTPClient _createClient({bool autoSendSessionId}) {
+  ParseHTTPClient _createClient({bool autoSendSessionId, Map<String,dynamic> coreDataMap}) {
     final coreData = ParseCoreData();
     bool sendSessionId = autoSendSessionId;
     if(sendSessionId == null) {
@@ -69,8 +69,10 @@ class ParseObject extends ParseBase implements ParseCloneable {
     }
 
     return ParseHTTPClient(
+        coreDataMap: coreDataMap,
         sendSessionId: sendSessionId,
-        securityContext: securityC);
+        securityContext: securityC,
+    );
   }
 
   /// Gets all objects from this table - Limited response at the moment

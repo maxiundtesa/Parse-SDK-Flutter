@@ -2,10 +2,13 @@ part of flutter_parse_sdk;
 
 /// Creates a custom version of HTTP Client that has Parse Data Preset
 class ParseHTTPClient with DioMixin implements Dio {
-  ParseHTTPClient({bool sendSessionId = false, SecurityContext securityContext})
+  ParseHTTPClient({bool sendSessionId = false, SecurityContext securityContext, Map<String, dynamic> coreDataMap})
       : _sendSessionId = sendSessionId {
     options = BaseOptions();
     httpClientAdapter = createHttpClientAdapter(securityContext);
+    if(coreDataMap != null) {
+      data = ParseCoreData.fromMap(coreDataMap);
+    }
   }
 
   final bool _sendSessionId;
