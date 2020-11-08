@@ -5,7 +5,16 @@ part of flutter_parse_sdk;
 /// Debug can be set in 2 places, one global param in the Parse.initialize, and
 /// then can be overwritten class by class
 bool isDebugEnabled({bool objectLevelDebug}) {
-  return objectLevelDebug ??= ParseCoreData().debug;
+  if(objectLevelDebug != null) {
+    return objectLevelDebug;
+  }
+  final ParseCoreData codeData = ParseCoreData();
+  if(codeData != null) {
+    return codeData.debug;
+  }
+  else {
+    return false;
+  }
 }
 
 /// Converts the object to the correct value for JSON,

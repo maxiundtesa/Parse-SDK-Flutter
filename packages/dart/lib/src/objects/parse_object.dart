@@ -15,11 +15,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
     _aggregatepath = '$keyEndPointAggregate$className';
 
     _debug = isDebugEnabled(objectLevelDebug: debug);
-    _client = client ??
-        ParseHTTPClient(
-            sendSessionId:
-                autoSendSessionId ?? ParseCoreData().autoSendSessionId,
-            securityContext: ParseCoreData().securityContext);
+    _client = client ?? _createClient(autoSendSessionId: autoSendSessionId);
   }
 
   ParseObject.clone(String className) : this(className);
@@ -50,6 +46,31 @@ class ParseObject extends ParseBase implements ParseCloneable {
     } on Exception catch (e) {
       return handleException(e, ParseApiRQ.get, _debug, parseClassName);
     }
+  }
+
+  ParseHTTPClient _createClient({bool autoSendSessionId}) {
+    final coreData = ParseCoreData();
+    bool sendSessionId = autoSendSessionId;
+    if(sendSessionId == null) {
+      if(coreData != null) {
+        sendSessionId = coreData.autoSendSessionId;
+      }
+      else {
+        sendSessionId = true;
+      }
+    }
+
+    SecurityContext securityC;
+    if(coreData != null) {
+      securityC = coreData.securityContext;
+    }
+    else {
+      securityC = null;
+    }
+
+    return ParseHTTPClient(
+        sendSessionId: sendSessionId,
+        securityContext: securityC);
   }
 
   /// Gets all objects from this table - Limited response at the moment
