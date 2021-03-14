@@ -4,12 +4,12 @@ version: 2.0.1
 homepage: https://github.com/phillwiggins/flutter_parse_sdk
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
 
   # Networking
-  dio: ^3.0.10
+  dio: ^4.0.0-beta7
   web_socket_channel: ^1.1.0
 
   #Database
@@ -18,7 +18,7 @@ dependencies:
   xxtea: ^2.0.3
 
   # Utils
-  uuid: ^2.2.2
+  uuid: ^3.0.1
   meta: ^1.1.8
   path: ^1.7.0
   mime_type: ^0.3.2

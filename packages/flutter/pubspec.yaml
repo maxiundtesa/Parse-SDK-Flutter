@@ -4,7 +4,7 @@ version: 2.0.1
 homepage: https://github.com/phillwiggins/flutter_parse_sdk
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.10.1 <3.0.0"
 
 dependencies:
   flutter:
@@ -16,14 +16,14 @@ dependencies:
       path: packages/dart
 
   # Networking
-  dio: ^3.0.10
-  connectivity: ^0.4.9+2 # only used in the flutter part
+  dio: ^4.0.0-beta7
+  connectivity: ^3.0.2 # only used in the flutter part
 
   #Database
-  shared_preferences: ^0.5.10 # only used in the flutter part
+  shared_preferences: ^2.0.4 # only used in the flutter part
 
   # Utils
-  path_provider: ^1.6.14 # only used in the flutter part
+  path_provider: ^2.0.1 # only used in the flutter part
   package_info: ^0.4.3 # only used in the flutter part
   sembast: ^2.4.7+6 # required for transitive use only
   path: ^1.7.0 # required for transitive use only
