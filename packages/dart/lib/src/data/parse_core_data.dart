@@ -132,4 +132,53 @@ class ParseCoreData {
 
   @override
   String toString() => '$applicationId $masterKey';
+
+  static void setFromMap(dynamic message) {
+    if (message == null) {
+      throw ArgumentError('The parameter \'message\' should not be null.');
+    }
+
+    final Map<dynamic, dynamic> coreDataMap = message;
+    final appId = coreDataMap['applicationId'] ?? '';
+    final serverUrl = coreDataMap['serverUrl'] ?? '';
+    final ParseCoreData coreData = ParseCoreData._init(appId, serverUrl);
+    coreData.appName = coreDataMap['name'];
+    coreData.appVersion = coreDataMap['appVersion'];
+    coreData.appPackageName = coreDataMap['appPackageName'];
+    coreData.locale = coreDataMap['locale'];
+    coreData.liveQueryURL = coreDataMap['liveQueryURL'];
+    coreData.masterKey = coreDataMap['masterKey'];
+    coreData.clientKey = coreDataMap['clientKey'];
+    coreData.sessionId = coreDataMap['sessionId'];
+    coreData.autoSendSessionId = coreDataMap['autoSendSessionId'] ?? true;
+    coreData.securityContext = coreDataMap['securityContext'];
+    coreData.debug = coreDataMap['debug'] ?? false;
+    coreData.liveListRetryIntervals = coreDataMap['liveListRetryIntervals'];
+    coreData.fileDirectory = coreDataMap['fileDirectory'];
+    coreData.clientCreator = coreDataMap['clientCreator'];
+    _instance = coreData;
+  }
+
+  /// Converts the [ParseCoreData] instance into a [Map] instance that can be
+  /// serialized to JSON.
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = Map<String, dynamic>();
+    map['appName'] = appName;
+    map['appVersion'] = appVersion;
+    map['appPackageName'] = appPackageName;
+    map['applicationId'] = applicationId;
+    map['locale'] = locale;
+    map['serverUrl'] = serverUrl;
+    map['liveQueryURL'] = liveQueryURL;
+    map['masterKey'] = masterKey;
+    map['clientKey'] = clientKey;
+    map['sessionId'] = sessionId;
+    map['autoSendSessionId'] = autoSendSessionId;
+    map['securityContext'] = securityContext;
+    map['debug'] = debug;
+    map['liveListRetryIntervals'] = liveListRetryIntervals;
+    map['fileDirectory'] = fileDirectory;
+    map['clientCreator'] = clientCreator;
+    return map;
+  }
 }

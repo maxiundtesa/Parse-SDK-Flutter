@@ -13,7 +13,7 @@ dependencies:
   parse_server_sdk:
 #    path: ../dart
     git:
-      url: git://github.com/parse-community/Parse-SDK-Flutter.git
+      url: git://github.com/maxiundtesa/Parse-SDK-Flutter.git
       ref: nullsafety
       path: packages/dart
 

@@ -82,4 +82,38 @@ class ParseError {
     exceptionString += '----';
     return exceptionString;
   }
+
+  static ParseError? createFromString(String errorMessage) {
+    if(errorMessage.contains('ParseException') == false) {
+      return null;
+    }
+
+    int index;
+
+    for(int i = 0; i<3;i++) {
+      index = errorMessage.indexOf('\n');
+      errorMessage = errorMessage.substring(index + 1);
+    }
+
+
+    errorMessage = errorMessage.replaceFirst('Code: ', '');
+    // Bis zum Newline ist der Code
+    index = errorMessage.indexOf('\n');
+    final String code = errorMessage.substring(0,index);
+    int? codeInt = int.tryParse(code);
+    if(codeInt == null) {
+      codeInt = -1;
+    }
+
+    // Code fertig
+    errorMessage = errorMessage.substring(index + 1);
+    errorMessage = errorMessage.replaceFirst('Message: ', '');
+    // Bis zum ---- ist die Message
+    index = errorMessage.indexOf('----');
+    final String message = errorMessage.substring(0,index);
+    // Code fertig
+
+    final ParseError pError = ParseError(code: codeInt, message: message );
+    return pError;
+  }
 }
