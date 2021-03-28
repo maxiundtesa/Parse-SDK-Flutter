@@ -155,7 +155,7 @@ class ParseCoreData {
     coreData.debug = coreDataMap['debug'] ?? false;
     coreData.liveListRetryIntervals = coreDataMap['liveListRetryIntervals'];
     coreData.fileDirectory = coreDataMap['fileDirectory'];
-    coreData.clientCreator = coreDataMap['clientCreator'];
+    coreData.clientCreator = (({required bool sendSessionId, SecurityContext? securityContext}) => ParseHTTPClient(sendSessionId: sendSessionId, securityContext: securityContext));
     _instance = coreData;
   }
 
@@ -178,7 +178,6 @@ class ParseCoreData {
     map['debug'] = debug;
     map['liveListRetryIntervals'] = liveListRetryIntervals;
     map['fileDirectory'] = fileDirectory;
-    map['clientCreator'] = clientCreator;
     return map;
   }
 }
