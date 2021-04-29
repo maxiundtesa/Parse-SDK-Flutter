@@ -24,10 +24,10 @@ class ParseUser extends ParseObject implements ParseCloneable {
           autoSendSessionId: true,
           debug: debug,
         ) {
-    this.username = username;
-    this.emailAddress = emailAddress;
-    this.password = password;
-    this.sessionToken = sessionToken;
+    if (username != null) this.username = username;
+    if (emailAddress != null) this.emailAddress = emailAddress;
+    if (password != null) this.password = password;
+    if (sessionToken != null) this.sessionToken = sessionToken;
   }
 
   ParseUser.forQuery() : super(keyClassUser);
@@ -51,8 +51,7 @@ class ParseUser extends ParseObject implements ParseCloneable {
   set password(String? password) {
     if (_password != password) {
       _password = password;
-      if (password != null)
-        _unsavedChanges[keyVarPassword] = password;
+      if (password != null) _unsavedChanges[keyVarPassword] = password;
     }
   }
 
@@ -111,7 +110,8 @@ class ParseUser extends ParseObject implements ParseCloneable {
   ///
   /// Uses token to get the latest version of the user. Prefer this to [getCurrentUserFromServer]
   /// if using custom ParseUser object
-  Future<ParseResponse?> getUpdatedUser({bool? debug, ParseClient? client}) async {
+  Future<ParseResponse> getUpdatedUser(
+      {bool? debug, ParseClient? client}) async {
     final bool _debug = isDebugEnabled(objectLevelDebug: debug);
     final ParseClient _client = client ??
         ParseCoreData().clientCreator(
@@ -120,7 +120,8 @@ class ParseUser extends ParseObject implements ParseCloneable {
 
     // We can't get the current user and session without a sessionId
     if ((ParseCoreData().sessionId == null) && (sessionToken == null)) {
-      return null;
+      ///return null;
+      throw 'can not get the current user and session without a sessionId';
     }
 
     final Map<String, String> headers = <String, String>{};
@@ -192,7 +193,7 @@ class ParseUser extends ParseObject implements ParseCloneable {
           options: ParseNetworkOptions(headers: <String, String>{
             keyHeaderRevocableSession: '1',
             if (installationId != null && !doNotSendInstallationID)
-                  keyHeaderInstallationId: installationId,
+              keyHeaderInstallationId: installationId,
           }),
           data: body);
 
