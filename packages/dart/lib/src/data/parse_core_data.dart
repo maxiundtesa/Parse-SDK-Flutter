@@ -155,6 +155,12 @@ class ParseCoreData {
     coreData.debug = coreDataMap['debug'] ?? false;
     coreData.liveListRetryIntervals = coreDataMap['liveListRetryIntervals'];
     coreData.fileDirectory = coreDataMap['fileDirectory'];
+    coreData._subClassHandler = ParseSubClassHandler(
+      registeredSubClassMap: null,
+      parseUserConstructor: null,
+      parseFileConstructor: null,
+    );
+    coreData.storage = CoreStoreMemoryImp();
     coreData.clientCreator = (({required bool sendSessionId, SecurityContext? securityContext}) => ParseHTTPClient(sendSessionId: sendSessionId, securityContext: securityContext));
     _instance = coreData;
   }
