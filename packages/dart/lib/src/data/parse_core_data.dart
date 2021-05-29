@@ -160,7 +160,7 @@ class ParseCoreData {
       parseUserConstructor: null,
       parseFileConstructor: null,
     );
-    coreData.storage = CoreStoreMemoryImp();
+    // coreData.storage = storage;
     coreData.clientCreator = (({required bool sendSessionId, SecurityContext? securityContext}) => ParseHTTPClient(sendSessionId: sendSessionId, securityContext: securityContext));
     _instance = coreData;
   }
